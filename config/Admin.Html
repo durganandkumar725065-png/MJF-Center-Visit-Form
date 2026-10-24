@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJF Center | Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="admin.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <h1>MJF Skill Allied Service Training Center</h1>
+            <p>Visitor Management Portal · Patna</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="loginPanel" class="panel login-panel">
+            <h2>Admin Login</h2>
+            <p>Sign in to manage visitor records.</p>
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input id="username" autocomplete="username" required>
+
+                <label for="password">Password</label>
+                <input id="password" type="password"
+                       autocomplete="current-password" required>
+
+                <button type="submit">Login</button>
+            </form>
+            <p id="loginMessage" role="status"></p>
+        </section>
+
+        <section id="dashboard" hidden>
+            <div class="heading-row">
+                <div>
+                    <h2>Admin Dashboard</h2>
+                    <p>Visitor records and center statistics</p>
+                </div>
+                <button id="logoutButton" class="secondary">Logout</button>
+            </div>
+
+            <div class="stats">
+                <article class="stat-card">
+                    <span>Total Visitors</span>
+                    <strong id="totalVisitors">—</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Today's Visitors</span>
+                    <strong id="todayVisitors">—</strong>
+                </article>
+            </div>
+
+            <section class="panel">
+                <div class="heading-row">
+                    <h2>Visitor Records</h2>
+                    <button id="exportButton">Download CSV</button>
+                </div>
+
+                <div class="search-row">
+                    <input id="searchInput"
+                           placeholder="Search name, email, phone or district">
+                    <button id="searchButton">Search</button>
+                </div>
+
+                <p id="recordMessage" role="status"></p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Age</th>
+                                <th>Qualification</th>
+                                <th>District</th>
+                                <th>Purpose</th>
+                                <th>Course</th>
+                                <th>Feedback</th>
+                                <th>Visit Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitorRows"></tbody>
+                    </table>
+                </div>
+                <p class="note">Up to 1,000 records are shown per search.</p>
+            </section>
+        </section>
+    </main>
+
+    <footer>MJF Skill Allied Service Training Center · Patna</footer>
+</body>
+</html>
