@@ -7,6 +7,8 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const { sql, connectDB } = require("./config/db");
 
+
+
 const app = express();
 app.use(express.static(__dirname));
 const PORT = process.env.PORT || 5000;
@@ -194,9 +196,12 @@ async function startServer() {
     try {
         await connectDB();
 
-        app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
+        const PORT = process.env.PORT || 5000;
+
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`Server running on port ${PORT}`);
         });
+
     } catch (error) {
         console.error("Server startup failed:", error.message);
         process.exit(1);

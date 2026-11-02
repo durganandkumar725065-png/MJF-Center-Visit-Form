@@ -1,26 +1,42 @@
+
 const sql = require("mssql");
 require("dotenv").config();
 
 const config = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
   server: process.env.DB_SERVER,
   database: process.env.DB_DATABASE,
   port: 1433,
   options: {
-    encrypt: false,
-    trustServerCertificate: true
-  }
+    encrypt: true,
+    trustServerCertificate: false
+  },
+  authentication: {
+    type: "azure-active-directory-default",
+    options: {}
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
+  },
+  connectionTimeout: 30000,
+  requestTimeout: 30000
 };
 
 async function connectDB() {
   try {
     await sql.connect(config);
-    console.log("✅ SQL Server Connected Successfully");
+    console.log("✅ Azure SQL Database Connected Successfully");
+  
   } catch (error) {
-    console.error("❌ Database Connection Failed:");
-    console.error(error.message);
+    console.error("❌ Azure Database Connection Failed:");
+    console.dir(error, { depth: 6 });
+    console.error("Error name:", error?.name);
+    console.error("Error message:", JSON.stringify(error?.message));
+    console.error("Error stack:", error?.stack);
+    throw error;
   }
+
 }
 
 module.exports = {
